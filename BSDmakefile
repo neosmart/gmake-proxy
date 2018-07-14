@@ -1,6 +1,7 @@
 # GNU makefile proxy script for BSD make
 # Written and maintained by Mahmoud Al-Qudsi <mqudsi@neosmart.net>
 # Copyright NeoSmart Technologies <https://neosmart.net/> 2014-2018
+# Obtain updates from <https://github.com/neosmart/gmake-proxy>
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:
