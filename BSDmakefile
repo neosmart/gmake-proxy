@@ -33,7 +33,7 @@ GMAKE = "gmake"
 GARGS = "--no-print-directory"
 
 .if "$(.MAKE.JOBS)" != ""
-JARG = -j$(.MAKE.JOBS)
+    JARG = -j$(.MAKE.JOBS)
 .endif
 
 # bmake prefers out-of-source builds and tries to cd into ./obj (among others)
@@ -44,7 +44,7 @@ JARG = -j$(.MAKE.JOBS)
 # specify the installation directory. Humor them.
 GPREFIX = ""
 .if defined(PREFIX) && ! defined(prefix)
-GPREFIX = 'prefix = "$(PREFIX)"'
+    GPREFIX = 'prefix = "$(PREFIX)"'
 .endif
 
 .PHONY: FRC
