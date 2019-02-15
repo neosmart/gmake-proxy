@@ -47,14 +47,12 @@ GPREFIX = ""
     GPREFIX = 'prefix = "$(PREFIX)"'
 .endif
 
+.BEGIN: .SILENT
+	which $(GMAKE) || printf "Error: GNU Make is required!\n\n" 1>&2 && false
+
 .PHONY: FRC
 $(.TARGETS): FRC
 	$(GMAKE) $(GPREFIX) $(GARGS) $(.TARGETS:S,.DONE,,) $(JARG)
 
 .DONE .DEFAULT: .SILENT
 	$(GMAKE) $(GPREFIX) $(GARGS) $(.TARGETS:S,.DONE,,) $(JARG)
-
-.ERROR: .SILENT
-	if ! which $(GMAKE) > /dev/null; then \
-		echo "GNU Make is required!"; \
-	fi
