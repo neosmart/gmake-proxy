@@ -40,12 +40,19 @@ JARG = -j$(.MAKE.JOBS)
 # where possible. GNU Make doesn't, so override that value.
 .OBJDIR: ./
 
+# The GNU convention is to use the lowercased `prefix` variable/macro to
+# specify the installation directory. Humor them.
+GPREFIX = ""
+.if defined(PREFIX) && ! defined(prefix)
+GPREFIX = 'prefix = "$(PREFIX)"'
+.endif
+
 .PHONY: FRC
 $(.TARGETS): FRC
-	$(GMAKE) $(GARGS) $(.TARGETS:S,.DONE,,) $(JARG)
+	$(GMAKE) $(GPREFIX) $(GARGS) $(.TARGETS:S,.DONE,,) $(JARG)
 
 .DONE .DEFAULT: .SILENT
-	$(GMAKE) $(GARGS) $(.TARGETS:S,.DONE,,) $(JARG)
+	$(GMAKE) $(GPREFIX) $(GARGS) $(.TARGETS:S,.DONE,,) $(JARG)
 
 .ERROR: .SILENT
 	if ! which $(GMAKE) > /dev/null; then \
