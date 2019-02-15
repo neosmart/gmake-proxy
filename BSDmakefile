@@ -1,4 +1,5 @@
 # GNU makefile proxy script for BSD make
+#
 # Written and maintained by Mahmoud Al-Qudsi <mqudsi@neosmart.net>
 # Copyright NeoSmart Technologies <https://neosmart.net/> 2014-2019
 # Obtain updates from <https://github.com/neosmart/gmake-proxy>
@@ -26,16 +27,17 @@
 
 JARG =
 GMAKE = "gmake"
-#When gmake is called from another make instance, -w is automatically added
-#which causes extraneous messages about directory changes to be emitted.
-#--no-print-directory silences these messages.
+# When gmake is called from another make instance, -w is automatically added
+# which causes extraneous messages about directory changes to be emitted.
+# Running with --no-print-directory silences these messages.
 GARGS = "--no-print-directory"
 
 .if "$(.MAKE.JOBS)" != ""
 JARG = -j$(.MAKE.JOBS)
 .endif
 
-#by default bmake will cd into ./obj first
+# bmake prefers out-of-source builds and tries to cd into ./obj (among others)
+# where possible. GNU Make doesn't, so override that value.
 .OBJDIR: ./
 
 .PHONY: FRC
